@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as e}from"./app.ead78b55.js";const d='{"title":"Executable module","description":"","frontmatter":{"sidebar":false},"headers":[],"relativePath":"articles/2020-01-12-executable-module.md","lastUpdated":null}',p={},t=e("",14),l=[t];function o(c,r,u,i,k,b){return a(),s("div",null,l)}var y=n(p,[["render",o]]);export{d as __pageData,y as default};

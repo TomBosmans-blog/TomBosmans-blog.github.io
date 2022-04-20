@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a,a as i}from"./app.ead78b55.js";const u='{"title":"Home","description":"","frontmatter":{"home":true},"headers":[],"relativePath":"articles/index.md","lastUpdated":null}',s={},l=i("",1),r=[l];function n(o,c,m,_,d,h){return a(),t("div",null,r)}var f=e(s,[["render",n]]);export{u as __pageData,f as default};

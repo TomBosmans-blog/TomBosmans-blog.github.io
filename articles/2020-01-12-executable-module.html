@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Executable module | Tom Bosmans</title>
+    <meta name="description" content="My personal blog.">
+    <link rel="stylesheet" href="/assets/style.c3210e46.css">
+    <link rel="modulepreload" href="/assets/app.ead78b55.js">
+    <link rel="modulepreload" href="/assets/articles_2020-01-12-executable-module.md.1eedbf69.lean.js">
+    
+    <meta name="twitter:title" content="Executable module | Tom Bosmans">
+  <meta property="og:title" content="Executable module | Tom Bosmans">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="no-sidebar theme"><header class="nav-bar" data-v-675d8756><div class="sidebar-button" data-v-675d8756><svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z" class></path></svg></div><a class="nav-bar-title" href="/" aria-label="Tom Bosmans, back to home" data-v-675d8756 data-v-cc01ef16><img class="logo" src="/logo.jpg" alt="Logo" data-v-cc01ef16> Tom Bosmans</a><div class="flex-grow" data-v-675d8756></div><div class="nav" data-v-675d8756><nav class="nav-links" data-v-675d8756 data-v-eab3edfe><!--[--><div class="item" data-v-eab3edfe><div class="nav-link" data-v-eab3edfe data-v-b8818f8c><a class="item" href="/" data-v-b8818f8c>Home <!----></a></div></div><div class="item" data-v-eab3edfe><div class="nav-link" data-v-eab3edfe data-v-b8818f8c><a class="item active" href="/articles/" data-v-b8818f8c>Blog <!----></a></div></div><!--]--><!----><div class="item" data-v-eab3edfe><div class="nav-link" data-v-eab3edfe data-v-b8818f8c><a class="item isExternal" href="https://github.com/TomBosmans-blog/vitepress" target="_blank" rel="noopener noreferrer" data-v-b8818f8c>GitHub <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-b8818f8c><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div></nav></div><!--[--><!--]--></header><aside class="sidebar" data-v-83e92a68><nav class="nav-links nav" data-v-83e92a68 data-v-eab3edfe><!--[--><div class="item" data-v-eab3edfe><div class="nav-link" data-v-eab3edfe data-v-b8818f8c><a class="item" href="/" data-v-b8818f8c>Home <!----></a></div></div><div class="item" data-v-eab3edfe><div class="nav-link" data-v-eab3edfe data-v-b8818f8c><a class="item active" href="/articles/" data-v-b8818f8c>Blog <!----></a></div></div><!--]--><!----><div class="item" data-v-eab3edfe><div class="nav-link" data-v-eab3edfe data-v-b8818f8c><a class="item isExternal" href="https://github.com/TomBosmans-blog/vitepress" target="_blank" rel="noopener noreferrer" data-v-b8818f8c>GitHub <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-b8818f8c><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div></nav><!--[--><!--]--><!----><!--[--><!--]--></aside><div class="sidebar-mask"></div><main class="page" data-v-7eddb2c4><div class="container" data-v-7eddb2c4><!--[--><!--]--><div style="position:relative;" class="content" data-v-7eddb2c4><div><h1 id="executable-module" tabindex="-1">Executable module <a class="header-anchor" href="#executable-module" aria-hidden="true">#</a></h1><p>Small classes that only do 1 thing are the best. They are easier to read, easier to test and overall less headaches 👌. These small classes usually only have 1 public method that I like to call <code>execute</code>, although <code>call</code> is also a popular name for it. These classes usually look like:</p><div class="language-rb line-numbers-mode"><pre><code><span class="token keyword">class</span> <span class="token class-name">Multiplier</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>param1<span class="token punctuation">,</span> param2<span class="token punctuation">)</span>
+    <span class="token variable">@param1</span> <span class="token operator">=</span> param1
+    <span class="token variable">@param2</span> <span class="token operator">=</span> param2
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">execute</span></span>
+    param1 <span class="token operator">*</span> param2
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  attr_reader <span class="token symbol">:param1</span><span class="token punctuation">,</span> <span class="token symbol">:param2</span>
+<span class="token keyword">end</span>
+
+<span class="token class-name">Multiplier</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">.</span>execute <span class="token comment"># =&gt; 30</span>
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>So you usually initialize to instantly execute/call your instance. As we are very lazy people, we want to shorten this!</p><div class="language-rb line-numbers-mode"><pre><code><span class="token keyword">class</span> <span class="token class-name">Multiplier</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>param1<span class="token punctuation">,</span> param2<span class="token punctuation">)</span>
+    <span class="token variable">@param1</span> <span class="token operator">=</span> param1
+    <span class="token variable">@param2</span> <span class="token operator">=</span> param2
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">execute</span></span>
+    param1 <span class="token operator">*</span> param2
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">execute</span></span><span class="token punctuation">(</span>param1<span class="token punctuation">,</span> param2<span class="token punctuation">)</span>
+    <span class="token keyword">new</span><span class="token punctuation">(</span>param1<span class="token punctuation">,</span> param2<span class="token punctuation">)</span><span class="token punctuation">.</span>execute
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  attr_reader <span class="token symbol">:param1</span><span class="token punctuation">,</span> <span class="token symbol">:param2</span>
+<span class="token keyword">end</span>
+
+Multiplier<span class="token punctuation">.</span>execute<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span> <span class="token comment"># =&gt; 30</span>
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><p>Perfect! Except now we have to write a class method for every such class we make... What about extracting it into a reusable module? But not every class we want to execute will have an <code>param1</code> and a <code>param2</code>, so we need to fix that first.</p><div class="language-rb line-numbers-mode"><pre><code><span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">execute</span></span><span class="token punctuation">(</span><span class="token operator">*</span>params<span class="token punctuation">)</span>
+  <span class="token keyword">new</span><span class="token punctuation">(</span><span class="token operator">*</span>params<span class="token punctuation">)</span><span class="token punctuation">.</span>execute
+<span class="token keyword">end</span>
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>For more info about <code>*</code>, the splat operator, you should check the ruby docs <a href="https://ruby-doc.org/core-2.5.0/doc/syntax/calling_methods_rdoc.html#label-Array+to+Arguments+Conversion" target="_blank" rel="noopener noreferrer">here</a>.</p><p>So how will this look with a module?</p><div class="language-rb line-numbers-mode"><pre><code><span class="token keyword">module</span> <span class="token class-name">Executable</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">execute</span></span><span class="token punctuation">(</span><span class="token operator">*</span>params<span class="token punctuation">)</span>
+    <span class="token keyword">new</span><span class="token punctuation">(</span><span class="token operator">*</span>params<span class="token punctuation">)</span><span class="token punctuation">.</span>execute
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Multiplier</span>
+  <span class="token keyword">extend</span> Executable
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>param1<span class="token punctuation">,</span> param2<span class="token punctuation">)</span>
+    <span class="token variable">@param1</span> <span class="token operator">=</span> param1
+    <span class="token variable">@param2</span> <span class="token operator">=</span> param2
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">execute</span></span>
+    param1 <span class="token operator">*</span> param2
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  attr_reader <span class="token symbol">:param1</span><span class="token punctuation">,</span> <span class="token symbol">:param2</span>
+<span class="token keyword">end</span>
+
+Multiplier<span class="token punctuation">.</span>execute<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span> <span class="token comment"># =&gt; 30</span>
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><p>By extending our <code>Executable</code> module in our <code>Multiplier</code> class we add the <code>execute</code> method on the <code>Multiplier</code> class level (same as <code>self.execute</code>).</p><p>Finally there is 1 more thing we could consider and that is <a href="https://ruby-doc.org/core-2.5.0/doc/syntax/calling_methods_rdoc.html#label-Block+Argument" target="_blank" rel="noopener noreferrer">blocks</a>. In our initializer we don&#39;t want to do anything more than initializing, so we should pass the given block to our execute method as that is where we actually execute our logic.</p><div class="language-rb line-numbers-mode"><pre><code><span class="token keyword">module</span> <span class="token class-name">Executable</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">execute</span></span><span class="token punctuation">(</span><span class="token operator">*</span>params<span class="token punctuation">,</span> <span class="token operator">&amp;</span>block<span class="token punctuation">)</span>
+    <span class="token keyword">new</span><span class="token punctuation">(</span><span class="token operator">*</span>params<span class="token punctuation">)</span><span class="token punctuation">.</span>execute<span class="token punctuation">(</span><span class="token operator">&amp;</span>block<span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Multiplier</span>
+  <span class="token keyword">extend</span> Executable
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>param1<span class="token punctuation">,</span> param2<span class="token punctuation">)</span>
+    <span class="token variable">@param1</span> <span class="token operator">=</span> param1
+    <span class="token variable">@param2</span> <span class="token operator">=</span> param2
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">execute</span></span>
+    result <span class="token operator">=</span> param1 <span class="token operator">*</span> param2
+    result <span class="token operator">=</span> <span class="token keyword">yield</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token keyword">if</span> block_given<span class="token operator">?</span>
+    result
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  attr_reader <span class="token symbol">:param1</span><span class="token punctuation">,</span> <span class="token symbol">:param2</span>
+<span class="token keyword">end</span>
+
+Multiplier<span class="token punctuation">.</span>execute<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">|</span>result<span class="token operator">|</span> result <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token comment"># =&gt; 31</span>
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br></div></div><p>In this case you could just have done <code>Multiplier.execute(5, 6) + 1</code> or even just <code>5 * 6 + 1</code>. But hey, this is way cooler isn&#39;t it? 😎.</p></div></div><footer class="page-footer" data-v-7eddb2c4 data-v-07c132fc><div class="edit" data-v-07c132fc><div class="edit-link" data-v-07c132fc data-v-1ed99556><!----></div></div><div class="updated" data-v-07c132fc><!----></div></footer><!----><!--[--><!--]--></div></main></div><!----><!--]--></div>
+    <script>__VP_HASH_MAP__ = JSON.parse("{\"articles_2020-01-12-executable-module.md\":\"1eedbf69\",\"articles_2020-01-22-replication-with-mysql-5-7.md\":\"f8f40f13\",\"articles_2020-02-27-query-objects.md\":\"896b880a\",\"articles_2020-03-19-add-json-synonyms-mime-types-in-rails.md\":\"82b67da5\",\"articles_2022-04-10-postgresql-version-management-with-docker.md\":\"582e0dc5\",\"articles_2022-04-20-use-nix-as-dev-env.md\":\"6101f19e\",\"articles_index.md\":\"7c1b56f6\",\"index.md\":\"6ebddf2d\"}")</script>
+    <script type="module" async src="/assets/app.ead78b55.js"></script>
+    
+  </body>
+</html>
